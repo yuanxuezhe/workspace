@@ -34,7 +34,7 @@ int main()
 
     while (fgets(sendbuf, sizeof(sendbuf), stdin) != NULL)
     {
-        write(sock, sendbuf, strlen(sendbuf));
+        write(sock, sendbuf, sizeof(sendbuf));
         read(sock,recvbuf, sizeof(recvbuf));
         fputs(recvbuf, stdout);
 

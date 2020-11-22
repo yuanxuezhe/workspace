@@ -7,17 +7,31 @@
 #include <arpa/inet.h>
 #include "../ys_public/ys_error.h"
 #include <string.h>
+#include <errno.h>
+#include "../ys_public/ys_socket.h"
+
 using namespace std;
 
 void do_serv(int conn)
-{
+{                                            
     char recvbuf[1024];
     while (1)
     {
         memset(recvbuf, 0, sizeof(recvbuf));
-        int ret = read(conn, recvbuf, sizeof(recvbuf));
+        int ret = readn(conn, recvbuf, sizeof(recvbuf));
+        if (ret == 0)
+        {
+            printf("client close \n");
+            break;
+        }
+        else if (ret == -1)
+        {       
+            ERR_EXIT("read");
+        }
+        
+        
         fputs(recvbuf, stdout);
-        write(conn, recvbuf, sizeof(recvbuf));
+        writen(conn, recvbuf, sizeof(recvbuf));
     }
 }
 
@@ -74,10 +88,8 @@ int main()
             close(listenfd);
             do_serv(conn);
         }
-        else
-        {
-            close(conn);
-        } 
+        
+        close(conn);
     }
 
     close(listenfd);
