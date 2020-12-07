@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../ys_public/ys_error.h"
+#include "../../ys_public/ys_error.h"
 #include <string.h>
 using namespace std;
 

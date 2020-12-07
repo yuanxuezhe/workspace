@@ -5,10 +5,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../ys_public/ys_error.h"
+#include "../../ys_public/ys_error.h"
 #include <string.h>
 #include <errno.h>
-#include "../ys_public/ys_socket.h"
+#include "../../ys_public/ys_socket.h"
 
 #include <sys/select.h>
 

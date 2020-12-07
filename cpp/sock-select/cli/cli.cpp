@@ -5,8 +5,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../ys_public/ys_error.h"
-#include "../ys_public/ys_socket.h"
+#include "../../ys_public/ys_error.h"
+#include "../../ys_public/ys_socket.h"
 #include <string.h>
 
 #include <sys/select.h>
