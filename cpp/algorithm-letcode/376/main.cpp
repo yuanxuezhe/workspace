@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -53,11 +54,8 @@ public:
 int main()
 {
     Solution s;
-    //vector <int> v = {1,7,4,9,2,5};
-    vector <int> v = {1,2,3,4,5,6,7,8,9};
-
-    //vector <int> v = {1,17,5,10,13,15,10,5,16,8};
-    printf("%d\n",s.wiggleMaxLength(v));
+    vector <int> v = {1,17,5,10,13,15,10,5,16,8};
+    cout << s.wiggleMaxLength(v) << endl;
 
     return 0;
 }
