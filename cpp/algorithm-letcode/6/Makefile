@@ -5,7 +5,7 @@ FLAG=-g -std=c++11
 NAME=$(wildcard *.cpp)
 TARGET=$(patsubst %.cpp, %, $(NAME))
 
-$(TARGET):$(OBJS)
+$(TARGET).out:$(OBJS)
 	$(CC) -o $@ $^ $(FLAG)
 
 %.o:%.cpp
