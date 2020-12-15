@@ -30,6 +30,7 @@
         "streambuf": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "cmath": "cpp"
     }
 }
