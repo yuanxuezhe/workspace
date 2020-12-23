@@ -244,7 +244,7 @@ int CRabbitmqClient::Consumer(const string &strQueueName, string &message_array,
         return -3;
     }
 
-    int hasget = 0;
+    //int hasget = 0;
     
     
     

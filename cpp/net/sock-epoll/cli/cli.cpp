@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: yuanshuai 446968454@qq.com
+ * @Date: 2020-12-23 22:54:51
+ * @LastEditors: yuanshuai 446968454@qq.com
+ * @LastEditTime: 2020-12-23 23:54:19
+ */
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
@@ -5,8 +13,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../../ys_public/ys_error.h"
-#include "../../ys_public/ys_socket.h"
+#include "../../../ys_public/ys_error.h"
+#include "../../../ys_public/ys_socket.h"
 #include <string.h>
 
 #include <sys/select.h>
@@ -34,7 +42,7 @@ void do_cli(int sock)
         FD_SET(sock, &rset);
 
         nready = select(nfds + 1, &rset, NULL, NULL, NULL);
-        printf("select nready %d \n",nready );
+
         if (nready == -1)
         {
             ERR_EXIT("select");
@@ -75,8 +83,15 @@ void do_cli(int sock)
   
     close(sock);
 }
-int main()
+int main(int argc, char const *argv[])
 {
+    int port = 9158;
+    if (argc == 2)
+    {
+        port=strtol(argv[1],NULL,10);
+    }
+    
+    
     int sock;
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -86,7 +101,7 @@ int main()
     sockaddr_in addr_in;
     memset(&addr_in, 0, sizeof(addr_in));
     addr_in.sin_family = AF_INET;
-    addr_in.sin_port = htons(9158);
+    addr_in.sin_port = htons(port);
     addr_in.sin_addr.s_addr = htonl(INADDR_ANY);//inet_addr("127.0.0.1");
 
     if(connect(sock, (struct sockaddr*)&addr_in, sizeof(addr_in)) < 0)

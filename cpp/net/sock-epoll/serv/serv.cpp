@@ -5,10 +5,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../../ys_public/ys_error.h"
+#include "../../../ys_public/ys_error.h"
 #include <string.h>
 #include <errno.h>
-#include "../../ys_public/ys_socket.h"
+#include "../../../ys_public/ys_socket.h"
 #include <vector>
 #include <sys/epoll.h>
 
@@ -16,8 +16,14 @@ using namespace std;
 
 typedef vector<struct epoll_event> EventList;
 
-int main()
+int main(int argc, char const *argv[])
 {
+    int port = 9158;
+    if (argc == 2)
+    {
+        port=strtol(argv[1],NULL,10);
+    }
+
     int listenfd;
     int on = 1;
     if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -32,7 +38,7 @@ int main()
     sockaddr_in addr_in;
     memset(&addr_in, 0, sizeof(addr_in));
     addr_in.sin_family = AF_INET;
-    addr_in.sin_port = htons(9158);
+    addr_in.sin_port = htons(port);
     addr_in.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(listenfd, (struct sockaddr *)&addr_in, sizeof(addr_in)) < 0)
     {
@@ -54,6 +60,7 @@ int main()
     epoll_ctl(epollfd, EPOLL_CTL_ADD, listenfd, &event);
 
     char recvbuf[1024];
+    char backbuff[1024];
     struct sockaddr_in peeraddr;
     socklen_t peerlen;
     int conn;
@@ -130,7 +137,9 @@ int main()
                 
                 fputs(recvbuf, stdout);
 
-                writen(conn, recvbuf, sizeof(recvbuf));
+                memset(backbuff, 0, sizeof(backbuff));
+                snprintf(backbuff, sizeof(backbuff),"Ans from [port:%d]: %s", port, recvbuf);
+                writen(conn, backbuff, sizeof(backbuff));
             }  
         }
     }
