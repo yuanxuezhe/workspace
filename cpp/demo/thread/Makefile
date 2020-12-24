@@ -1,17 +1,15 @@
 CC=g++
-CFLAG = -g -Wno-deprecated
+SRCS=$(wildcard *.cpp */*.cpp)
+OBJS=$(patsubst %.cpp, %.o, $(SRCS))
+FLAG=-g -std=c++11 -lpthread
+NAME=$(wildcard *.cpp)
+TARGET=$(patsubst %.cpp, %, $(NAME))
 
-all : pooltest 
+$(TARGET).out:$(OBJS)
+	$(CC) -o $@ $^ $(FLAG)
 
-#manage : ThreadManage.cpp Thread.cpp ThreadPool.cpp  WorkerThread.cpp Job.cpp ../sync/sync.cpp
-#	$(CC) $(CFLAG) manage ThreadManage.cpp Thread.cpp ThreadPool.cpp Job.cpp WorkerThread.cpp ../sync/sync.cpp -lpthread
+%.o:%.cpp
+	$(CC) -o $@ -c $< $(FLAG)
 
-pooltest :PoolTest.cpp ThreadManage.cpp Thread.cpp ThreadPool.cpp  WorkerThread.cpp Job.cpp ../sync/sync.cpp
-	$(CC) $(CFLAG) PoolTest.cpp ThreadManage.cpp Thread.cpp ThreadPool.cpp Job.cpp WorkerThread.cpp ../sync/sync.cpp -lpthread
-clean :
-	@rm -f *.o
-
-
-
-
-
+clean:
+	rm -rf $(TARGET) $(OBJS)
