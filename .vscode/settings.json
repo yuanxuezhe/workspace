@@ -34,6 +34,11 @@
         "cmath": "cpp",
         "string": "cpp",
         "random": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "chrono": "cpp",
+        "numeric": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp",
+        "list": "c"
     }
 }
