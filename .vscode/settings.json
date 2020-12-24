@@ -33,6 +33,7 @@
         "typeinfo": "cpp",
         "cmath": "cpp",
         "string": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "deque": "cpp"
     }
 }
