@@ -4,15 +4,8 @@
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 23:21:02
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 23:21:02
+ * @LastEditTime: 2020-12-26 00:56:02
  */
-/*****************************************************************
-*Role:The file manage Linux thread ,include create thread etc.   *
-*CopyRight(c):                                                   *
-*       flydish,2004,06,25                                       *
-*History:                                                        *
-*       Create by flydish,2004,06,25                             *
-*****************************************************************/
 
 #include "Job.h"
 

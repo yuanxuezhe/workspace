@@ -118,7 +118,7 @@ CJob* CThreadPool::GetIdleJob(void)
 {
     //no job in job list,so we wait for job!
     while(m_JobList.size() == 0)
-	m_IdleJobCond.Wait();	
+	    m_IdleJobCond.Wait();	
 
     m_JobMutex.Lock();
     if(m_JobList.size()>0)
@@ -196,12 +196,12 @@ void CThreadPool::Run()
 	    CJob* job = GetIdleJob();
 	    if(job != NULL)
 	    {
-		idlethr->SetThreadPool(this);
-		idlethr->m_WorkMutex.Lock();
-		printf("Job is set to thread %d \n",idlethr->GetThreadID());
-		idlethr->SetJob(job,NULL);
-		idlethr->SetThreadPool(this);
-		job->SetWorkThread(idlethr);
+            idlethr->SetThreadPool(this);
+            idlethr->m_WorkMutex.Lock();
+            printf("Job is set to thread %u \n",idlethr->GetThreadID());
+            idlethr->SetJob(job,NULL);
+            idlethr->SetThreadPool(this);
+            job->SetWorkThread(idlethr);
 	    }
 	    idlethr = GetIdleThread();
 	}

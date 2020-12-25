@@ -23,22 +23,22 @@ void CWorkerThread::Run()
     //problem occurs here
     for(;;)
     {
-	//no job in job list,so we wait.^_^
-	while(m_Job == NULL)
-	{
-	    printf("Job is null,thread %d will wait!\n",GetThreadID());
-	    m_JobCond.Wait(); 
-	}
+        //no job in job list,so we wait.^_^
+        while(m_Job == NULL)
+        {
+            printf("Job is null,thread %u will wait!\n",GetThreadID());
+            m_JobCond.Wait(); 
+        }
 
-	m_ThreadPool->MoveToBusyList(this);	
+        m_ThreadPool->MoveToBusyList(this);	
 
-	printf("Idle thread %d has get a job and will execute!\n",GetThreadId());
-	m_Job->Run(m_JobData);
-	m_Job->SetWorkThread(NULL);
-	m_Job = NULL;
-	m_WorkMutex.Unlock();
-	printf("Append the thread %d to idle list again\n",GetThreadID());
-	m_ThreadPool->MoveToIdleList(this);
+        printf("Idle thread %u has get a job and will execute!\n",GetThreadId());
+        m_Job->Run(m_JobData);
+        m_Job->SetWorkThread(NULL);
+        m_Job = NULL;
+        m_WorkMutex.Unlock();
+        printf("Append the thread %u to idle list again\n",GetThreadID());
+        m_ThreadPool->MoveToIdleList(this);
     }
 }
 

@@ -4,7 +4,7 @@
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 22:13:52
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 23:21:58
+ * @LastEditTime: 2020-12-26 01:13:55
  */
 #include "Job.h"
 #include "time.h"
@@ -23,7 +23,7 @@ public:
         mutex.Lock();
         i++;
         mutex.Unlock();
-        printf("%d\n",i);
+        printf("CXJob %d\n",i);
         sleep(2);
     }
 };
@@ -41,7 +41,7 @@ public:
         mutex.Lock();
         printf("==========================\n");
         mutex.Unlock();
-        printf("%d\n",i);
+        printf("CYJob %d\n",i);
         sleep(2);
     }
 };
