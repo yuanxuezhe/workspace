@@ -4,7 +4,7 @@
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 00:40:10
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 00:46:16
+ * @LastEditTime: 2020-12-25 23:21:14
  */
 
 #ifndef _THREADMANAGE_H_
@@ -13,7 +13,7 @@
 #include "ThreadPool.h"
 #include "Thread.h"
 #include "sync.h"
-#include "WorkerThread.h"
+//#include "WorkerThread.h"
 #include "Job.h"
 
 //===============================================================

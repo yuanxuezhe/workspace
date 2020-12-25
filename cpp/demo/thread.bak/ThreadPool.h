@@ -2,25 +2,55 @@
  * @Description: 
  * @Version: 1.0
  * @Autor: yuanshuai 446968454@qq.com
+ * @Date: 2020-12-25 22:48:56
+ * @LastEditors: yuanshuai 446968454@qq.com
+ * @LastEditTime: 2020-12-25 23:22:57
+ */
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 00:38:03
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 00:54:20
+ * @LastEditTime: 2020-12-25 22:48:50
  */
 #ifndef _THREADPOOL_H_
 #define _THREADPOOL_H_
 
-#include "Thread.h"
+//#include "Thread.h"
 #include "WorkerThread.h"
 #include "Job.h"
 #include "sync.h"
 #include <vector>
 
+class CJob;
 class CWorkerThread;
 
 class CThreadPool
 {
 friend class CWorkerThread;
+public:
+    CThreadPool();
+    CThreadPool(int maxnum,int minnum,int initnum);
+    CThreadPool(int initnum);
+    virtual ~CThreadPool();
 
+    void    SetMaxNum(int maxnum){m_MaxNum = maxnum;}
+    int     GetMaxNum(void){return m_MaxNum;}
+    
+    void    SetMinNum(int minnum){m_MinNum = minnum;}
+    int     GetMinNum(void){return m_MinNum;}
+   
+    void    SetActiveNum(int activenum){m_ActiveNum = activenum;}
+    int     GetActiveNum(void){return m_ActiveNum;}
+
+    int     GetBusyNum(void){return m_BusyNum;}
+    int     GetIdleNum(void){return m_IdleNum;} 
+    int     GetAliveNum(void){return m_AliveNum;}
+
+    void    PostJob(CJob* job,void* jobdata);
+    void    Run();
+    void    TerminateAll(void);
 private:
     unsigned int	m_MaxNum;	//the max thread num that can create at the same time
     unsigned int	m_ActiveNum;	//the normal thread num that keep alive
@@ -54,28 +84,6 @@ public:
     std::vector<CWorkerThread*>	m_BusyList;     //Thread List
     std::vector<CWorkerThread*>	m_IdleList;	//Idle List
     std::vector<CJob*>		m_JobList;      //Job list
-
-    CThreadPool();
-    CThreadPool(int maxnum,int minnum,int initnum);
-    CThreadPool(int initnum);
-    virtual ~CThreadPool();
-
-    void    SetMaxNum(int maxnum){m_MaxNum = maxnum;}
-    int     GetMaxNum(void){return m_MaxNum;}
-    
-    void    SetMinNum(int minnum){m_MinNum = minnum;}
-    int     GetMinNum(void){return m_MinNum;}
-   
-    void    SetActiveNum(int activenum){m_ActiveNum = activenum;}
-    int     GetActiveNum(void){return m_ActiveNum;}
-
-    int     GetBusyNum(void){return m_BusyNum;}
-    int     GetIdleNum(void){return m_IdleNum;} 
-    int     GetAliveNum(void){return m_AliveNum;}
-
-    void    PostJob(CJob* job,void* jobdata);
-    void    Run();
-    void    TerminateAll(void);
 };
 
 

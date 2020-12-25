@@ -4,7 +4,7 @@
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 00:44:30
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 00:44:31
+ * @LastEditTime: 2020-12-25 22:21:16
  */
 #ifndef _YS_COMM_H_
 #define _YS_COMM_H_
@@ -65,5 +65,6 @@ typedef  unsigned long       ULONG;
 #define ERR_NOT_IMPLEMENT	7
 #define ERR_GENERAL		8
 
+#define PATH_MAX 100
 #endif
 

@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: yuanshuai 446968454@qq.com
+ * @Date: 2020-12-25 23:21:02
+ * @LastEditors: yuanshuai 446968454@qq.com
+ * @LastEditTime: 2020-12-25 23:21:02
+ */
 /*****************************************************************
 *Role:The file manage Linux thread ,include create thread etc.   *
 *CopyRight(c):                                                   *

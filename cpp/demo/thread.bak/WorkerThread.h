@@ -4,7 +4,7 @@
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 00:37:25
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 00:46:39
+ * @LastEditTime: 2020-12-25 23:14:53
  */
 #ifndef _WORKERTHREAD_H_
 #define _WORKERTHREAD_H_
@@ -18,25 +18,11 @@
  *class CWorkerThread is the actual thread that run the job,but
  *
  **************************************************************/
-
-//class CThreadPool;
-
+class CJob;
+class CThreadPool;
 class CWorkerThread:public CThread
 {
-private:
-    CThreadPool*  m_ThreadPool;
-    
-    //the job that associate with the workthread
-    CJob*	 m_Job;
-    void*	 m_JobData;	
-    
-    CThreadMutex m_VarMutex;
-    bool 	 m_IsEnd;
-protected:
 public:
-    CCondition   m_JobCond;
-    CThreadMutex m_WorkMutex;
-  
     CWorkerThread();
     virtual ~CWorkerThread();
     
@@ -50,6 +36,20 @@ public:
     bool    IsWorking(void){return m_Job != NULL;} 
 
     void    Wakeup(CJob* job,void* jobdata);
+
+private:
+    CThreadPool*  m_ThreadPool;
+    
+    //the job that associate with the workthread
+    CJob*	 m_Job;
+    void*	 m_JobData;	
+    
+    CThreadMutex m_VarMutex;
+    bool 	 m_IsEnd;
+protected:
+public:
+    CCondition   m_JobCond;
+    CThreadMutex m_WorkMutex;
 };
 
 #endif

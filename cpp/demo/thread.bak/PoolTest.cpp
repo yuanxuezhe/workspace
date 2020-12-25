@@ -1,7 +1,14 @@
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: yuanshuai 446968454@qq.com
+ * @Date: 2020-12-25 22:13:52
+ * @LastEditors: yuanshuai 446968454@qq.com
+ * @LastEditTime: 2020-12-25 23:21:58
+ */
 #include "Job.h"
 #include "time.h"
 #include "ThreadManage.h"
-
 
 class CXJob:public CJob
 {
@@ -13,11 +20,11 @@ public:
     ~CXJob(){}
     void Run(void* jobdata)
     {
-	mutex.Lock();
-	i++;
-	mutex.Unlock();
-	printf("%d\n",i);
-	sleep(2);
+        mutex.Lock();
+        i++;
+        mutex.Unlock();
+        printf("%d\n",i);
+        sleep(2);
     }
 };
 

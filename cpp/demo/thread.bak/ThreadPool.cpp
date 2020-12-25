@@ -15,12 +15,12 @@ CThreadPool::CThreadPool()
     m_IdleList.clear();
     for(int i=0;i<m_ActiveNum;i++)
     {
-	printf("create a thread\n");
-	CWorkerThread* thr = new CWorkerThread();
-	thr->SetThreadPool(this);
-	AppendToIdleList(thr);
-	thr->Start();
-	thr->SetConcurrency(m_ActiveNum+thr->GetConcurrency());
+        printf("create a thread\n");
+        CWorkerThread* thr = new CWorkerThread();
+        thr->SetThreadPool(this);
+        AppendToIdleList(thr);
+        thr->Start();
+        thr->SetConcurrency(m_ActiveNum+thr->GetConcurrency());
     }
 }
 
@@ -30,28 +30,28 @@ CThreadPool::CThreadPool(int maxnum,int minnum,int initnum)
     assert(minnum > 0 && minnum <= maxnum);
     assert(initnum > 0 && initnum <=maxnum && initnum >= minnum);
     if(maxnum>0)
-	m_MaxNum = maxnum;
+	    m_MaxNum = maxnum;
     else if(minnum>0 && minnum<=m_MaxNum)
-	m_MinNum = minnum;
+	    m_MinNum = minnum;
     else if(initnum>=m_MinNum && initnum <= m_MaxNum)
-	m_ActiveNum = initnum;
+	    m_ActiveNum = initnum;
     else
     {
-	m_MinNum = 5;
-	m_ActiveNum = 10 ;   
-	m_BusyNum = 0;
-	m_IdleNum = 0;
+        m_MinNum = 5;
+        m_ActiveNum = 10 ;   
+        m_BusyNum = 0;
+        m_IdleNum = 0;
     }
     m_JobList.clear();
     m_BusyList.clear();
     m_IdleList.clear();
     for(int i=0;i<m_ActiveNum;i++)
     {
-	CWorkerThread* thr = new CWorkerThread();
-	thr->SetThreadPool(this);
-	AppendToIdleList(thr);
-	thr->Start();
-	thr->SetConcurrency(initnum+thr->GetConcurrency());
+        CWorkerThread* thr = new CWorkerThread();
+        thr->SetThreadPool(this);
+        AppendToIdleList(thr);
+        thr->Start();
+        thr->SetConcurrency(initnum+thr->GetConcurrency());
     }
 }
 
@@ -68,11 +68,11 @@ CThreadPool::CThreadPool(int initnum)
     m_IdleList.clear();
     for(int i=0;i<m_ActiveNum;i++)
     {
-	CWorkerThread* thr = new CWorkerThread();
-	thr->SetThreadPool(this);
-	AppendToIdleList(thr);
-	thr->Start();		//begin the thread,the thread wait for job
-	thr->SetConcurrency(initnum+thr->GetConcurrency());
+        CWorkerThread* thr = new CWorkerThread();
+        thr->SetThreadPool(this);
+        AppendToIdleList(thr);
+        thr->Start();		//begin the thread,the thread wait for job
+        thr->SetConcurrency(initnum+thr->GetConcurrency());
     }
 }
 
@@ -84,8 +84,8 @@ void CThreadPool::TerminateAll()
 {
     for(int i=0;i < m_ThreadList.size();i++)
     {
-	CWorkerThread* thr = m_ThreadList[i];
-	thr->Join();
+        CWorkerThread* thr = m_ThreadList[i];
+        thr->Join();
     }
     return;
 }
@@ -105,9 +105,9 @@ CWorkerThread* CThreadPool::GetIdleThread(void)
     m_IdleMutex.Lock();
     if(m_IdleList.size()>0)
     {
-	CWorkerThread* thr = (CWorkerThread*)m_IdleList.front();
-	m_IdleMutex.Unlock();
-	return thr;
+        CWorkerThread* thr = (CWorkerThread*)m_IdleList.front();
+        m_IdleMutex.Unlock();
+        return thr;
     }
     m_IdleMutex.Unlock();
 
@@ -123,10 +123,10 @@ CJob* CThreadPool::GetIdleJob(void)
     m_JobMutex.Lock();
     if(m_JobList.size()>0)
     {
-	CJob* job = (CJob*)m_JobList.back();
-	m_JobMutex.Unlock();
-	DeleteJob(job);
-	return job;
+        CJob* job = (CJob*)m_JobList.back();
+        m_JobMutex.Unlock();
+        DeleteJob(job);
+        return job;
     }
     m_JobMutex.Unlock();
     
@@ -136,11 +136,11 @@ CJob* CThreadPool::GetIdleJob(void)
 bool  CThreadPool::DeleteJob(CJob* job)
 {
     if(m_JobList.size() ==0)
-	return false;
+	    return false;
     std::vector<CJob*>::iterator pos;
     pos = find(m_JobList.begin(),m_JobList.end(),job);
     if(pos!=m_JobList.end())
-	m_JobList.erase(pos);
+	    m_JobList.erase(pos);
 }
 
 //add an idle thread to idle list

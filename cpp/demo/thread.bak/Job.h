@@ -1,10 +1,12 @@
-/*****************************************************************
-*Role:The file manage Linux thread ,include create thread etc.   *
-*CopyRight(c):                                                   *
-*       flydish,2004,06,25                                       *
-*History:                                                        *
-*       Create by flydish,2004,06,25                             *
-*****************************************************************/
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: yuanshuai 446968454@qq.com
+ * @Date: 2020-12-25 22:22:03
+ * @LastEditors: yuanshuai 446968454@qq.com
+ * @LastEditTime: 2020-12-25 23:18:55
+ */
+
 #ifndef _JOB_H_
 #define _JOB_H_
 
@@ -34,8 +36,8 @@ public:
     void	SetJobName(char* jobname);
 
     CThread *GetWorkThread(void){ return m_pWorkThread; }
-    void SetWorkThread ( CThread *pWorkThread ){
-	m_pWorkThread = pWorkThread;
+    void SetWorkThread (CThread *pWorkThread){
+	    m_pWorkThread = pWorkThread;
     }
 
     bool	GetTerminated(void);

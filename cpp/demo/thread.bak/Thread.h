@@ -4,7 +4,7 @@
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-25 00:39:55
  * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-25 00:45:55
+ * @LastEditTime: 2020-12-25 23:00:53
  */
 #ifndef _THREAD_H_
 #define _THREAD_H_
@@ -12,7 +12,7 @@
 #include "ys_comm.h"
 #include <semaphore.h>
 #include <pthread.h>
-#include "ThreadPool.h"
+//#include "ThreadPool.h"
 
 typedef sem_t Semaphore;
 
