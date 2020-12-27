@@ -5,24 +5,84 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../../../ys_public/ys_error.h"
+#include "ys_error.h"
 #include <string.h>
 #include <errno.h>
-#include "../../../ys_public/ys_socket.h"
+#include "ys_socket.h"
 #include <vector>
 #include <sys/epoll.h>
+#include "zookeeper/zookeeper.h"
+#include "CZkCreateEphemeralNode.h"
 
 using namespace std;
 
 typedef vector<struct epoll_event> EventList;
 
+int create_root(zhandle_t *zkhandle, const char *node_name, const char *data) {
+    int ret;
+    struct Stat stat;
+    char node[512] = {0};
+
+    printf("zoo_create /zkwatcher node\n");
+
+    ret = zoo_exists(zkhandle, node_name, true, &stat);
+
+    if (ret == ZOK) {
+        printf("create_root %s already create\n", node_name);
+    } else if (ret == ZNONODE){
+        ret = zoo_create(zkhandle,
+                node_name, 
+                data, 
+                sizeof(data),
+                &ZOO_OPEN_ACL_UNSAFE,  /* a completely open ACL */
+                0,
+                node,
+                sizeof(node)-1);
+        if (ret) {
+            fprintf(stderr, "zoo_create error [%d]\n", ret);
+        }
+    } else {
+        printf("create_root error\n"); 
+    }
+    return ret;
+}
+//https://blog.csdn.net/yangzhen92/article/details/53248294
+//https://blog.csdn.net/weixin_30919571/article/details/99812566?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control
+//https://download.csdn.net/download/wcwtianxia/10571835?utm_medium=distribute.pc_relevant_t0.none-task-download-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-download-BlogCommendFromBaidu-1.control
+//https://github.com/fdxuwei/cppzk
 int main(int argc, char const *argv[])
 {
+    const char* host = "127.0.0.1:2181";
+    zhandle_t* zkhandle;
+    int timeout = 5000;
+    zoo_set_debug_level(ZOO_LOG_LEVEL_DEBUG);
+    zoo_deterministic_conn_order(1);
+    zkhandle = zookeeper_init(host, NULL, timeout, 
+            0, (void *)"Zookeeper examples: config center services", 0);
+    if (zkhandle == NULL) {
+        fprintf(stderr, "Connecting to zookeeper servers error...\n");
+        exit(EXIT_FAILURE);
+    }
+
     int port = 9158;
     if (argc == 2)
     {
         port=strtol(argv[1],NULL,10);
     }
+    else
+    {
+        ERR_EXIT("argv error!");
+    }
+
+    printf("zoo_create /servers node\n");
+    create_root(zkhandle, "/servers", NULL);
+
+    std::string strError;
+	CZkCreateEphemeralNode* pZk = new CZkCreateEphemeralNode("127.0.0.1:2181", 3000, "/servers/serv", argv[1], strError);
+	if ( strError.length() > 0 )
+	{
+		wcout << L"CZkCreateEphemeralNode error." << endl;
+	}
 
     int listenfd;
     int on = 1;

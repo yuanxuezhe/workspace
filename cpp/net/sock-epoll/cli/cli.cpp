@@ -3,8 +3,8 @@
  * @Version: 1.0
  * @Autor: yuanshuai 446968454@qq.com
  * @Date: 2020-12-23 22:54:51
- * @LastEditors: yuanshuai 446968454@qq.com
- * @LastEditTime: 2020-12-23 23:54:19
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-27 22:24:33
  */
 #include <iostream>
 #include <stdio.h>
@@ -13,10 +13,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../../../ys_public/ys_error.h"
-#include "../../../ys_public/ys_socket.h"
+#include "ys_error.h"
+#include "ys_socket.h"
 #include <string.h>
-
+#include "zookeeper/zookeeper.h"
 #include <sys/select.h>
 
 using namespace std;
@@ -85,10 +85,26 @@ void do_cli(int sock)
 }
 int main(int argc, char const *argv[])
 {
+    const char* host = "127.0.0.1:2181";
+    zhandle_t* zkhandle;
+    int timeout = 5000;
+
+    zkhandle = zookeeper_init(host, NULL, timeout, 
+            0, (char*)"Zookeeper examples: config center services", 0);
+    if (zkhandle == NULL) {
+        fprintf(stderr, "Connecting to zookeeper servers error...\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    zoo_aget_children(zkhandle,)
     int port = 9158;
     if (argc == 2)
     {
         port=strtol(argv[1],NULL,10);
+    }
+    else
+    {
+        ERR_EXIT("argv error!");
     }
     
     
