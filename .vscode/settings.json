@@ -39,6 +39,15 @@
         "numeric": "cpp",
         "ratio": "cpp",
         "thread": "cpp",
-        "list": "c"
+        "list": "c",
+        "atomic": "cpp",
+        "cstddef": "cpp",
+        "algorithm": "cpp",
+        "map": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp"
     }
 }
