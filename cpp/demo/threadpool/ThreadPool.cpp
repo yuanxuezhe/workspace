@@ -211,6 +211,7 @@ void CThreadPool::PostJob(CJob* job,void* jobdata)
 {
     m_JobMutex.Lock();
     m_JobList.push_back(job);
+    printf("Job[%s] is add to the  m_JobList \n", job->GetJobName());
     m_JobMutex.Unlock();
 
     m_IdleJobCond.Signal();

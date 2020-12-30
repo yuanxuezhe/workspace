@@ -56,13 +56,17 @@ main()
     for(i=0;i<4;i++)
     {
         CXJob*   job = new CXJob();
+        job->SetJobName("CXJOB ");
         manage->PostJob(job,NULL);
     }
+    printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     manage->Run();
-
+    printf("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
     CYJob* job = new CYJob();
+    job->SetJobName("CYJOB ");
     manage->PostJob(job,NULL);
+    printf("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
     
-    manage->Run();
+    //manage->Run();
     manage->TerminateAll();
 }
