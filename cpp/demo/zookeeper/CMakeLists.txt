@@ -28,6 +28,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 include_directories( 
     "/usr/local/include/"
     "/usr/local/include/zookeeper"
+    "/home/yxz/workspace/cpp/ys_public"
 )
 
 #link_libraries( 
@@ -44,4 +45,4 @@ aux_source_directory(${PROJECT_SOURCE_DIR} DIRS)
 
 
 add_executable(${PROJECT_NAME} ${DIRS})
-target_link_libraries(${PROJECT_NAME} rabbitmq)
+target_link_libraries(${PROJECT_NAME} zookeeper_mt)
