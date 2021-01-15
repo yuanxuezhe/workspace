@@ -33,41 +33,32 @@ struct Node* createNode(int value) {
 struct Node* addNode(int value, struct Node*pNode) {
     if (pNode == NULL)
     {
-         return  createNode(value);
+         pNode = createNode(value);
     }
-
-    if (value == pNode->data)
-    {
-        return pNode;
-    }
-    
-    if (value < pNode->data)
+    else if (value < pNode->data)
     {
         if (pNode->pLChild == NULL)
         {
             pNode->pLChild = createNode(value);
-            return pNode;
         }
         else
         {
-            return addNode(value, pNode->pLChild);
-        }
-        
-        
+            addNode(value, pNode->pLChild);
+        }  
     }
-
-    if (value > pNode->data)
+    else if (value > pNode->data)
     {
         if (pNode->pRChild == NULL)
         {
             pNode->pRChild = createNode(value);
-            return pNode;
         }
         else
         {
-            return addNode(value, pNode->pRChild);
+            addNode(value, pNode->pRChild);
         }
     }
+
+    return pNode;
 }
  
 #endif

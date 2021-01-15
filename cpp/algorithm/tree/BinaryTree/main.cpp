@@ -13,12 +13,11 @@
 int main(int argc, char const *argv[])
 {
     struct Node* pnode;
-    int a[] = {9,1,2,22,65,32,53,3,4,5,6,7};
+    int a[] = {9,1,2,22,65,32,53,3,4,5,6};
     for (size_t i = 0; i < sizeof(a)/sizeof(int); i++)
     {
         pnode = addNode(a[i],NULL);
     }
-    
-    return pnode->data;
+    printf("%d \n",pnode->data );
     return 0;
 }

@@ -27,7 +27,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 include_directories( 
     "/usr/local/include/"
-    "/usr/local/include/zookeeper"
+    "/ypublic/library/include/"
+    "/ypublic/library/include/zookeeper"
     "/home/yxz/workspace/cpp/ys_public"
 )
 
